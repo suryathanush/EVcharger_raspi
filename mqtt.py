@@ -1,11 +1,22 @@
 from paho.mqtt import client as mqtt_client
 import time, json
 import config
-import display
+import socket
+import datetime
+#import display
 
 command = "stop"
 connection_flag = False
 
+def check_internet(host="8.8.8.8", port=53, timeout=3):
+    try:
+        socket.setdefaulttimeout(timeout)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        return True
+    except socket.error as ex:
+        print(ex)
+        return False
+    
 def read_credentials(file_path):
     credentials = {}
     with open(file_path, 'r') as file:
@@ -76,7 +87,7 @@ def publish(client, message):
             return False
          
 def subscribe(client: mqtt_client):
-    global command
+    global command, elapse_start_time
     def on_message(client, userdata, msg):
         global command
         data = json.loads(msg.payload.decode())
@@ -88,19 +99,20 @@ def subscribe(client: mqtt_client):
             if(data["Command"]=="start"):
                 print("command start recieved")
                 command = "start"
+                config.elapse_start_time = time.time()
                 config.prev_idle_time = time.time()
                 config.relay_pin.value = False
-                config.red_LED.value = True
-                config.green_LED.value = False
-                config.orange_LED.value = False
+                # config.red_LED.value = True
+                # config.green_LED.value = False
+                # config.orange_LED.value = False
             elif(data["Command"]=="stop"):
                 print("command stop recieved")
                 command = "stop"
-                display.draw_image("/home/surya/evcharger/qr.png")
+                #display.draw_image("/home/surya/evcharger/qr.png")
                 config.relay_pin.value = True
-                config.red_LED.value = False
-                config.green_LED.value = True
-                config.orange_LED.value = False
+                # config.red_LED.value = False
+                # config.green_LED.value = True
+                # config.orange_LED.value = False
             else:
                 print(f'command corrupted : received -> {data["Command"]}')
 

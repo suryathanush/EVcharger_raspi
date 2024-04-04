@@ -3,7 +3,7 @@ import board
 
 deviceId = 123456
 
-dashboard_url = "3.211.231.196:3000"
+dashboard_url = "185.199.53.238:5050"
 
 #relay pin
 relay_pin = digitalio.DigitalInOut(board.D4)
@@ -36,7 +36,7 @@ Rotation = 180
 font_path = '/home/surya/evcharger/fotns/OpenSans-Bold.ttf'
 font_path_2 = '/home/surya/evcharger/fotns/OpenSans-ExtraBold.ttf'
 font_size = 12
-mqtt_broker = "3.211.231.196"
+mqtt_broker = "185.199.53.238"
 mqtt_port = 1883
 
 # Create the topic string.
@@ -56,3 +56,9 @@ idle_time_in_sec = 300
 cutoff_current = 0.5 # in Ampere
 
 prev_idle_time = 0
+
+elapse_start_time = 0.0
+
+upload_interval = 5
+
+prev_upload_time = 0.0

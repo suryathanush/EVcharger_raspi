@@ -1,4 +1,4 @@
-#!/home/surya/evcharger2.0/env/bin/python
+#!/home/surya/evcharger/env/bin/python
 # -*- coding: utf-8 -*-
 
 # Copyright (c) 2018-2022, Emmanuel Blot <emmanuel.blot@free.fr>

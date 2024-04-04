@@ -1,4 +1,4 @@
-#!/home/surya/evcharger2.0/env/bin/python
+#!/home/surya/evcharger/env/bin/python
 
 """Simple Python serial terminal
 """
